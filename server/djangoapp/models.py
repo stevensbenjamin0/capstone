@@ -38,3 +38,10 @@ class CarModel(models.Model):
 
     def __str__(self):
         return self.name  # Return the name as the string representation
+
+from django.contrib import admin
+from .models import CarMake, CarModel
+
+# Registering models with their respective admins
+admin.site.register(CarMake)
+admin.site.register(CarModel)
