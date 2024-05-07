@@ -1,4 +1,4 @@
-esversion: 8
+/*jshint esversion: 8 */
 const express = require('express');
 const mongoose = require('mongoose');
 const fs = require('fs');
@@ -36,6 +36,7 @@ app.get('/', async (req, res) => {
     res.send("Welcome to the Mongoose API")
 });
 
+
 // Express route to fetch all reviews
 app.get('/fetchReviews', async (req, res) => {
   try {
@@ -45,6 +46,7 @@ app.get('/fetchReviews', async (req, res) => {
     res.status(500).json({ error: 'Error fetching documents' });
   }
 });
+
 
 // Express route to fetch reviews by a particular dealer
 app.get('/fetchReviews/Dealer/:id', async (req, res) => {
@@ -56,6 +58,7 @@ app.get('/fetchReviews/Dealer/:id', async (req, res) => {
   }
 });
 
+
 // Express route to fetch all dealerships
 app.get('/fetchDealers', async (req, res) => {
     try {
@@ -65,6 +68,7 @@ app.get('/fetchDealers', async (req, res) => {
         res.status(500).json({ error: 'Error fetching all dealers' });
     }
 });
+
 
 // Express route to fetch Dealers by a particular state
 app.get('/fetchDealers/:state', async (req, res) => {
@@ -78,6 +82,7 @@ app.get('/fetchDealers/:state', async (req, res) => {
         }
 });
 
+
 // Express route to fetch dealer by a particular id
 app.get('/fetchDealer/:id', async (req, res) => {
     const id = req.params.id;
@@ -90,22 +95,23 @@ app.get('/fetchDealer/:id', async (req, res) => {
         }
 });
 
+
 //Express route to insert review
 app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
   data = JSON.parse(req.body);
-  const documents = await Reviews.find().sort( { id: -1 } )
+  const documents = await Reviews.find().sort( { id: -1 } );
   let new_id = documents[0]['id']+1
 
   const review = new Reviews({
-		"id": new_id,
-		"name": data['name'],
-		"dealership": data['dealership'],
-		"review": data['review'],
-		"purchase": data['purchase'],
-		"purchase_date": data['purchase_date'],
-		"car_make": data['car_make'],
-		"car_model": data['car_model'],
-		"car_year": data['car_year'],
+		"id": data.id,
+		"name": data.name,
+		"dealership": data.dealership,
+		"review": data.review,
+		"purchase": data.purchase,
+		"purchase_date": data.purchase_date,
+		"car_make": data.car_make,
+		"car_model": data.car_model,
+		"car_year": data.car_year,
 	});
 
   try {
@@ -116,6 +122,7 @@ app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
     res.status(500).json({ error: 'Error inserting review' });
   }
 });
+
 
 // Start the Express server
 app.listen(port, () => {
