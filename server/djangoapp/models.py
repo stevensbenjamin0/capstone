@@ -7,21 +7,21 @@ from .models import CarMake, CarModel
 class CarMake(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    # Other fields as needed
+    
 
     def __str__(self):
-        return self.name  # Return the name as the string representation
+        return self.name 
 
 
 class CarModel(models.Model):
-    car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)  # Many-to-One relationship
+    car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE) 
     name = models.CharField(max_length=100)
     CAR_TYPES = [
         ('COUPE', 'Coupe'),
-        ('EXOTIC','Exotic/Supercar'),
+        ('EXOTIC', 'Exotic/Supercar'),
         ('HISTORIC', 'Historic'),
-        ('HYBRID','Hybrid/EV'),
-        ('RV','Recreational Vehicle'),
+        ('HYBRID', 'Hybrid/EV'),
+        ('RV', 'Recreational Vehicle'),
         ('SEDAN', 'Sedan'),
         ('SUV', 'SUV'),
         ('TRUCK', 'Truck'),
@@ -35,7 +35,6 @@ class CarModel(models.Model):
             MaxValueValidator(2025),
             MinValueValidator(1886)
         ])
-    # Other fields as needed
 
     def __str__(self):
         return self.name  # Return the name as the string representation
