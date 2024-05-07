@@ -1,4 +1,4 @@
-esversion: 8
+/*jshint esversion: 8 */
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
