@@ -73,26 +73,26 @@ app.get('/fetchDealers', async (req, res) => {
 // Express route to fetch Dealers by a particular state
 app.get('/fetchDealers/:state', async (req, res) => {
     const state = req.params.state;
-        try {
-          const dealers = await Dealerships.findById(state);
-          res.json(dealers);
-        } catch (err) {
-          console.error(err);
-          res.status(500).json({ error: 'Error fetching dealer by state' });
-        }
+    try {
+        const dealers = await Dealerships.find({ state: state });
+        res.json(dealers);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error fetching dealers by state' });
+    }
 });
 
 
 // Express route to fetch dealer by a particular id
 app.get('/fetchDealer/:id', async (req, res) => {
     const id = req.params.id;
-        try {
-          const dealer = await Dealerships.findById(id);
-          res.json(dealer);
-        } catch (err) {
-          console.error(err);
-          res.status(500).json({ error: 'Error fetching dealer by id' });
-        }
+    try {
+        const dealer = await Dealerships.findOne({ id: id });
+        res.json(dealer);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error fetching dealer by id' });
+    }
 });
 
 
